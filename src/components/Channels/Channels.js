@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
-import useDeepCompareEffect from "use-deep-compare-effect";
 import { getChannels } from "../../redux/actions/channels";
 import Buttons from './Buttons';
 import './Channels.scss';
@@ -9,13 +8,24 @@ import './Channels.scss';
 const Channels = () => {
   const dispatch = useDispatch();
   const channels = useSelector(state => state.channels);
-  const [channelList] = useState(channels);
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
+  const [orderBy, setOrderBy] = useState('title');
+  const [channelList, setChannelList] = useState(channels);
+
+  // const [, updateState] = useState();
+  // const forceUpdate = useCallback(() => updateState({}), []);
 
   useEffect(() => {
     dispatch(getChannels);
   }, [dispatch]);
+
+  const sortChannels = (orderBy, orderType) => {
+    const sorted = [...channels].sort((a, b) => {
+      if (orderType === 'asc') return a[orderBy] - b[orderBy];
+      else return b[orderBy] - a[orderBy];
+    });
+    console.log(sorted);
+    setChannelList(sorted);
+  };
 
   const displayChannels = (page) => {
     const displayCurrentSchedule = (currentSchedule) => {
@@ -56,7 +66,7 @@ const Channels = () => {
 
   return (
     <div className="channel-container">
-      <Buttons />
+      <Buttons sortChannels={sortChannels} />
       <div className="table-container" role="table" aria-label="channels">
         <div className="flex-table header" role="rowgroup">
         <div className="flex-row first" role="columnheader">Channel</div>

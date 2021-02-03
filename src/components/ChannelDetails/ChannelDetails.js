@@ -4,6 +4,7 @@ import './ChannelDetails.scss';
 
 const ChannelDetails = ({ match }) => {
   const [channelDetailsData, setChannelDetailsData] = useState();
+  
   useEffect(() => {
     const getDetails = async () => {
       try {
@@ -15,7 +16,7 @@ const ChannelDetails = ({ match }) => {
     }
     getDetails();
   }, [match.params.id]);
-  console.log(channelDetailsData);
+
   return (
     <div className="channel-details-container">
       <table className="table table-hover table-condensed table-striped table-responsive">

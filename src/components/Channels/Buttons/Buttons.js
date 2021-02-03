@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { sortChannels } from '../../../redux/actions/channels';
 import './Buttons.scss';
 
-const Buttons = () => {
-  const dispatch = useDispatch();
+const Buttons = ({ sortChannels }) => {
+  // const dispatch = useDispatch();
   
   const sortButton = () => {
     return (
@@ -12,10 +12,10 @@ const Buttons = () => {
         <div className="dd-button">Sort</div>
         <input type="checkbox" className="dd-input" />
         <ul className="dd-menu">
-          <li onClick={() => dispatch(sortChannels('title', 'asc'))}>by Name ascending</li>
-          <li onClick={() => dispatch(sortChannels('title', 'desc'))}>by Name descending</li>
-          <li onClick={() => dispatch(sortChannels('stbNumber', 'asc'))}>by Channel ascending</li>
-          <li onClick={() => dispatch(sortChannels('stbNumber', 'asc'))}>by Channel descending</li>
+          <li onClick={() => sortChannels('title', 'asc')}>by Name ascending</li>
+          <li onClick={() => sortChannels('title', 'desc')}>by Name descending</li>
+          <li onClick={() => sortChannels('stbNumber', 'asc')}>by Channel ascending</li>
+          <li onClick={() => sortChannels('stbNumber', 'desc')}>by Channel descending</li>
           {/* <li onClick={() => setField('stbNumber')}>by Channel Number</li> */}
         </ul>
       </label>
