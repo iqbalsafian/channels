@@ -11,9 +11,6 @@ const Channels = () => {
   const [orderBy, setOrderBy] = useState('title');
   const [channelList, setChannelList] = useState(channels);
 
-  // const [, updateState] = useState();
-  // const forceUpdate = useCallback(() => updateState({}), []);
-
   useEffect(() => {
     dispatch(getChannels);
   }, [dispatch]);
@@ -23,8 +20,15 @@ const Channels = () => {
       if (orderType === 'asc') return a[orderBy] - b[orderBy];
       else return b[orderBy] - a[orderBy];
     });
-    console.log(sorted);
     setChannelList(sorted);
+  };
+
+  const searchChannel = (searchText) => {
+    console.log(searchText);
+    const searched = [...channels].filter(channel => {
+      return (channel.title === searchText || channel.stbNumber === searchText)
+    });
+    setChannelList(searched);
   };
 
   const displayChannels = (page) => {
@@ -66,7 +70,7 @@ const Channels = () => {
 
   return (
     <div className="channel-container">
-      <Buttons sortChannels={sortChannels} />
+      <Buttons sortChannels={sortChannels} searchChannel={searchChannel} />
       <div className="table-container" role="table" aria-label="channels">
         <div className="flex-table header" role="rowgroup">
         <div className="flex-row first" role="columnheader">Channel</div>

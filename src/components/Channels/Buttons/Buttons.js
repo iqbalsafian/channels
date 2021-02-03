@@ -1,10 +1,8 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { sortChannels } from '../../../redux/actions/channels';
+import React, { useState } from 'react';
 import './Buttons.scss';
 
-const Buttons = ({ sortChannels }) => {
-  // const dispatch = useDispatch();
+const Buttons = ({ sortChannels, searchChannel }) => {
+  const [searchText, setSearchText] = useState();
   
   const sortButton = () => {
     return (
@@ -25,8 +23,8 @@ const Buttons = ({ sortChannels }) => {
   const searchArea = () => {
     return (
       <div>
-        <input type="text" size="5" onChange={e => {}} />
-        <button type="button">Search</button>
+        <input type="text" size="5" value={searchText} onChange={e => setSearchText(e.target.value)} />
+        <button type="button" onClick={() => searchChannel(searchText)}>Search</button>
       </div>
     )
   };
