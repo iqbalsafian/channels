@@ -26,9 +26,6 @@ const Channels = () => {
         else if (a[orderBy] < b[orderBy]) return 1;
         else return 0;
       }
-      // if (a[orderBy] === b[orderBy]) return 0;
-      // if (orderType === 'asc') return a[orderBy] - b[orderBy];
-      // else return b[orderBy] - a[orderBy];
     });
     setChannelList(sorted);
   };

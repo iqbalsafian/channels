@@ -26,7 +26,7 @@ const ChannelDetails = ({ match }) => {
           <div className="text-center">
             <div className="tabs">
               <div className="tab">
-                <input type="checkbox" id={`chk_${theDate}`} />
+                <input type="checkbox" id={`chk_${theDate}`} className="tab-input" />
                 <label className="tab-label" htmlFor={`chk_${theDate}`}>{theDate}</label>
                 <div className="tab-content">
                   {

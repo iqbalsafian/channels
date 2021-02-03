@@ -95,7 +95,7 @@ $clouds: #ecf0f1;
   }
   
   // :checked
-  input:checked {
+  .tab-input:checked {
     + .tab-label {
       background: darken($midnight, 10%);
       &::after {
@@ -107,7 +107,7 @@ $clouds: #ecf0f1;
       padding: 1em;
     }
   }
-  input {
+  .tab-input {
     position: absolute;
     opacity: 0;
     z-index: -1;
