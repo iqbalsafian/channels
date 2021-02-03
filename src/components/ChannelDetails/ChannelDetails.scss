@@ -1,0 +1,36 @@
+$table-header: #1976D2;
+$table-header-border: #1565C0;
+$table-border: #d9d9d9;
+$row-bg: #f4f2f1;
+
+.channel-details-container {
+    table {
+        width: 97%;
+        margin: 0 auto;
+        tr {
+            td {
+                padding: 10px 0;;
+            }
+        }
+    }
+    table.table-responsive tr td:first-child {
+        width: 30%;
+        background-color: #1976D2;
+    }
+    table.table-responsive tr td:nth-child(2) {
+        text-align: left;
+        padding: 7px;
+    }
+    @media only screen and (max-width: 550px) {
+        table.table-responsive tr {
+            display: block;
+        }
+        table.table-responsive tr td {
+            display: block;
+            width: 100%;
+        }
+        table.table-responsive tr td:first-child {
+            width: 100%;
+        }
+    }
+}
