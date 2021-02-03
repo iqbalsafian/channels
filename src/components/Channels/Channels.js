@@ -15,12 +15,25 @@ const Channels = () => {
   }, [dispatch]);
 
   const sortChannels = (orderBy, orderType) => {
+    console.log(orderBy);
     const sorted = [...channels].sort((a, b) => {
-      if (orderType === 'asc') return a[orderBy] - b[orderBy];
-      else return b[orderBy] - a[orderBy];
+      if (orderType === 'asc') {
+        if (a[orderBy] < b[orderBy]) return -1
+        else if (a[orderBy] > b[orderBy]) return 1;
+        else return 0;
+      } else {
+        if (a[orderBy] > b[orderBy]) return -1
+        else if (a[orderBy] < b[orderBy]) return 1;
+        else return 0;
+      }
+      // if (a[orderBy] === b[orderBy]) return 0;
+      // if (orderType === 'asc') return a[orderBy] - b[orderBy];
+      // else return b[orderBy] - a[orderBy];
     });
     setChannelList(sorted);
   };
+
+  console.log(channels);
 
   const searchChannel = (searchText) => {
     const searched = [...channels].filter(channel => {

@@ -19,8 +19,6 @@ const ChannelDetails = ({ match }) => {
     getDetails();
   }, [match.params.id]);
 
-  console.log(channelDetailsData);
-
   const renderSchedule = (schedule) => {
     if (schedule) {
       return Object.entries(schedule).map(([theDate, theEvents]) => {
