@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { getChannels } from "../../redux/actions/channels";
@@ -8,7 +8,6 @@ import './Channels.scss';
 const Channels = () => {
   const dispatch = useDispatch();
   const channels = useSelector(state => state.channels);
-  const [orderBy, setOrderBy] = useState('title');
   const [channelList, setChannelList] = useState(channels);
 
   useEffect(() => {
@@ -24,9 +23,10 @@ const Channels = () => {
   };
 
   const searchChannel = (searchText) => {
-    console.log(searchText);
     const searched = [...channels].filter(channel => {
-      return (channel.title === searchText || channel.stbNumber === searchText)
+      if (searchText !== '')
+        return (channel.title === searchText || channel.stbNumber === searchText)
+      return channel;
     });
     setChannelList(searched);
   };

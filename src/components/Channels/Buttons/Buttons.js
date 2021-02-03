@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Buttons.scss';
 
 const Buttons = ({ sortChannels, searchChannel }) => {
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState('');
   
   const sortButton = () => {
     return (
