@@ -3,6 +3,14 @@ import './Buttons.scss';
 
 const Buttons = ({ sortChannels, searchChannel }) => {
   const [searchText, setSearchText] = useState('');
+  const [sortedBy, setSortedBy] = useState('title');
+  const [sortedType, setSortedType] = useState('asc');
+
+  const handleSort = (orderBy, orderType) => {
+    sortChannels(orderBy, orderType);
+    setSortedBy(orderBy);
+    setSortedType(orderType);
+  };
   
   const sortButton = () => {
     return (
@@ -10,11 +18,30 @@ const Buttons = ({ sortChannels, searchChannel }) => {
         <div className="dd-button">Sort</div>
         <input type="checkbox" className="dd-input" />
         <ul className="dd-menu">
-          <li onClick={() => sortChannels('title', 'asc')}>by Name ascending</li>
-          <li onClick={() => sortChannels('title', 'desc')}>by Name descending</li>
-          <li onClick={() => sortChannels('stbNumber', 'asc')}>by Channel ascending</li>
-          <li onClick={() => sortChannels('stbNumber', 'desc')}>by Channel descending</li>
-          {/* <li onClick={() => setField('stbNumber')}>by Channel Number</li> */}
+          <li onClick={() => handleSort('title', 'asc')}>
+            by Name ascending
+            {
+              (sortedBy === 'title') && (sortedType === 'asc') && <span className="checkmark" />
+            }
+          </li>
+          <li onClick={() => handleSort('title', 'desc')}>
+            by Name descending
+            {
+              (sortedBy === 'title') && (sortedType === 'desc') && <span className="checkmark" />
+            }
+          </li>
+          <li onClick={() => handleSort('stbNumber', 'asc')}>
+            by Channel ascending
+            {
+              (sortedBy === 'stbNumber') && (sortedType === 'asc') && <span className="checkmark" />
+            }
+          </li>
+          <li onClick={() => handleSort('stbNumber', 'desc')}>
+            by Channel descending
+            {
+              (sortedBy === 'stbNumber') && (sortedType === 'desc') && <span className="checkmark" />
+            }
+          </li>
         </ul>
       </label>
     )
@@ -23,16 +50,16 @@ const Buttons = ({ sortChannels, searchChannel }) => {
   const searchArea = () => {
     return (
       <div>
-        <input type="text" size="5" value={searchText} onChange={e => setSearchText(e.target.value)} />
-        <button type="button" onClick={() => searchChannel(searchText)}>Search</button>
+        <input style={{marginLeft: '-60px', paddingRight: '10px'}} type="text" size="5" value={searchText} onChange={e => setSearchText(e.target.value)} />
+        <button style={{marginLeft: '10px'}} type="button" onClick={() => searchChannel(searchText)}>Search</button>
       </div>
     )
   };
 
   return (
     <div className="buttons-container">
-      { sortButton() }
-      { searchArea() }
+      <div style={{float: 'left'}}>{ sortButton() }</div>
+      <div>{ searchArea() }</div>
     </div>
   )
 };

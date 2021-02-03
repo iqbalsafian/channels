@@ -15,7 +15,6 @@ const Channels = () => {
   }, [dispatch]);
 
   const sortChannels = (orderBy, orderType) => {
-    console.log(orderBy);
     const sorted = [...channels].sort((a, b) => {
       if (orderType === 'asc') {
         if (a[orderBy] < b[orderBy]) return -1
@@ -29,8 +28,6 @@ const Channels = () => {
     });
     setChannelList(sorted);
   };
-
-  console.log(channels);
 
   const searchChannel = (searchText) => {
     const searched = [...channels].filter(channel => {

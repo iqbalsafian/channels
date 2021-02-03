@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_CHANNELS, SORT_CHANNELS } from '../types';
+import { GET_CHANNELS } from '../types';
 
 export const getChannels = async dispatch => {
   try {
@@ -9,5 +9,3 @@ export const getChannels = async dispatch => {
     console.log('errors', error);
   }
 };
-
-export const sortChannels = (orderType, orderBy) => ({ type: SORT_CHANNELS, payload: { orderType, orderBy }});
