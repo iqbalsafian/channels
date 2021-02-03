@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
-import { getChannels } from "../../redux/actions/channels";
+import { addToFavorite, getChannels, removeFromFavourite } from "../../redux/actions/channels";
 import Buttons from './Buttons';
 import './Channels.scss';
 
 const Channels = () => {
   const dispatch = useDispatch();
-  const channels = useSelector(state => state.channels);
-  const [channelList, setChannelList] = useState(channels);
 
   useEffect(() => {
     dispatch(getChannels);
   }, [dispatch]);
+  
+  const channels = useSelector(state => state.channels);
+  const favourites = useSelector(state => state.favourites);
+  const [channelList, setChannelList] = useState();
+  console.log(channelList);
+
+  useEffect(() => {
+    setChannelList(channels);
+  }, [channels]);
+
 
   const sortChannels = (orderBy, orderType) => {
     const sorted = [...channels].sort((a, b) => {
@@ -53,8 +61,7 @@ const Channels = () => {
     };
 
     return (
-      channelList
-      && channelList.map(channel => {
+      channelList && channelList.map(channel => {
         return (
           <div key={channel?.id} className="flex-table row" role="rowgroup">
             <div className="flex-row first" role="cell">
@@ -62,9 +69,22 @@ const Channels = () => {
                   {channel?.title}
                 </NavLink>
                 <div className="favorite-container">
-                  <button onClick={() => alert(1)}>
-                    Add to favourite
-                  </button>
+                  {
+                    !favourites.includes(channel?.id)
+                    && (
+                      <button onClick={() => dispatch(addToFavorite(channel?.id))}>
+                        Add to favourite
+                      </button>
+                    )
+                  }
+                  {
+                    favourites.includes(channel?.id)
+                    && (
+                      <button onClick={() => dispatch(removeFromFavourite(channel?.id))}>
+                        Remove from favorite
+                      </button>
+                    )
+                  }
                 </div>
               </div>
             <div className="flex-row" role="cell">{channel?.stbNumber}</div>

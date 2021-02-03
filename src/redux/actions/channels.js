@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_CHANNELS } from '../types';
+import { ADD_TO_FAVOURITES, GET_CHANNELS, REMOVE_FROM_FAVOURITES } from '../types';
 
 export const getChannels = async dispatch => {
   try {
@@ -9,3 +9,11 @@ export const getChannels = async dispatch => {
     console.log('errors', error);
   }
 };
+
+export const addToFavorite = channelId => {
+  return { type: ADD_TO_FAVOURITES, payload: channelId };
+}
+
+export const removeFromFavourite = (channelId) => {
+  return { type: REMOVE_FROM_FAVOURITES, payload: channelId };
+}
