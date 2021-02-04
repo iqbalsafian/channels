@@ -10,10 +10,11 @@ export const getChannels = async dispatch => {
   }
 };
 
-export const addToFavorite = channelId => {
-  return { type: ADD_TO_FAVOURITES, payload: channelId };
-}
+// export const addToFavorite = channelId => {
+//   return { type: ADD_TO_FAVOURITES, payload: channelId };
+// }
 
-export const removeFromFavourite = (channelId) => {
-  return { type: REMOVE_FROM_FAVOURITES, payload: channelId };
-}
+export const addToFavorite = channelId => dispatch => dispatch({ type: ADD_TO_FAVOURITES, payload: channelId })
+
+export const removeFromFavourite = (channelId) => dispatch => 
+  dispatch({ type: REMOVE_FROM_FAVOURITES, payload: channelId });

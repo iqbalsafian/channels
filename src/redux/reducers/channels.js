@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 };
 
 const channels = (state = INITIAL_STATE, action) => {
-  let favourites = state.favourites;
   switch (action.type) {
     case GET_CHANNELS:
       return {
@@ -14,7 +13,7 @@ const channels = (state = INITIAL_STATE, action) => {
         channels: action.payload
       }
     case ADD_TO_FAVOURITES:
-      favourites = state.favourites;
+      let favourites = state.favourites;
       favourites.push(action.payload);
       return {
         ...state,
@@ -22,8 +21,7 @@ const channels = (state = INITIAL_STATE, action) => {
       }
     case REMOVE_FROM_FAVOURITES:
       favourites = state.favourites;
-      const indexNumber = favourites.includes(action.payload);
-      console.log(indexNumber);
+      const indexNumber = favourites.indexOf(action.payload);
       favourites.splice(indexNumber, 1);
       return {
         ...state,

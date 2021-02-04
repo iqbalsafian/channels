@@ -23,7 +23,7 @@ const ChannelDetails = ({ match }) => {
     if (schedule) {
       return Object.entries(schedule).map(([theDate, theEvents]) => {
         return (
-          <div className="text-center">
+          <div className="text-center" key={theDate}>
             <div className="tabs">
               <div className="tab">
                 <input type="checkbox" id={`chk_${theDate}`} className="tab-input" />

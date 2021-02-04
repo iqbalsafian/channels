@@ -6,8 +6,7 @@ import thunk from 'redux-thunk';
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: ['channels', 'favourites']
+  storage
 };
 
 const persistedReducer = persistReducer(persistConfig, channels);

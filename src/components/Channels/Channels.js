@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
-import { addToFavorite, getChannels, removeFromFavourite } from "../../redux/actions/channels";
+import { getChannels } from "../../redux/actions/channels";
 import Buttons from './Buttons';
 import './Channels.scss';
 
@@ -13,14 +13,18 @@ const Channels = () => {
   }, [dispatch]);
   
   const channels = useSelector(state => state.channels);
-  const favourites = useSelector(state => state.favourites);
   const [channelList, setChannelList] = useState();
-  console.log(channelList);
+  const [favouriteList, setFavouriteList] = useState();
 
   useEffect(() => {
     setChannelList(channels);
   }, [channels]);
 
+  useEffect(() => {
+    const getter = localStorage.getItem('favourites');
+    if (getter)
+      setFavouriteList(JSON.parse(getter));
+  }, []);
 
   const sortChannels = (orderBy, orderType) => {
     const sorted = [...channels].sort((a, b) => {
@@ -46,6 +50,26 @@ const Channels = () => {
     setChannelList(searched);
   };
 
+  const addFavorite = async channelId => {
+    const getter = JSON.parse(localStorage.getItem('favourites'));
+    if (getter) {
+      getter.push(channelId);
+      await localStorage.setItem("favourites", `[${getter}]`);
+      setFavouriteList(JSON.parse(localStorage.getItem("favourites")));
+    } else {
+      await localStorage.setItem("favourites", `[${channelId}]`);
+      setFavouriteList(JSON.parse(localStorage.getItem("favourites")));
+    }
+  };
+
+  const removeFavourite = async channelId => {
+    const getter = JSON.parse(localStorage.getItem('favourites'));
+    const indexNumber = getter.indexOf(channelId);
+    getter.splice(indexNumber, 1);
+    await localStorage.setItem("favourites", `[${getter}]`);
+    setFavouriteList(getter);
+  }
+
   const displayChannels = (page) => {
     const displayCurrentSchedule = (currentSchedule) => {
       return (
@@ -70,17 +94,17 @@ const Channels = () => {
                 </NavLink>
                 <div className="favorite-container">
                   {
-                    !favourites.includes(channel?.id)
+                    (!favouriteList?.includes(channel?.id))
                     && (
-                      <button onClick={() => dispatch(addToFavorite(channel?.id))}>
+                      <button onClick={() => addFavorite(channel?.id)}>
                         Add to favourite
                       </button>
                     )
                   }
                   {
-                    favourites.includes(channel?.id)
+                    favouriteList?.includes(channel?.id)
                     && (
-                      <button onClick={() => dispatch(removeFromFavourite(channel?.id))}>
+                      <button onClick={() => removeFavourite(channel?.id)}>
                         Remove from favorite
                       </button>
                     )
