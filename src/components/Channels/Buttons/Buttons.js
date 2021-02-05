@@ -3,8 +3,8 @@ import './Buttons.scss';
 
 const Buttons = ({ sortChannels, searchChannel }) => {
   const [searchText, setSearchText] = useState('');
-  const [sortedBy, setSortedBy] = useState('title');
-  const [sortedType, setSortedType] = useState('asc');
+  const [sortedBy, setSortedBy] = useState('');
+  const [sortedType, setSortedType] = useState('');
 
   const handleSort = (orderBy, orderType) => {
     sortChannels(orderBy, orderType);

@@ -29,12 +29,12 @@ const Channels = () => {
   const sortChannels = (orderBy, orderType) => {
     const sorted = [...channels].sort((a, b) => {
       if (orderType === 'asc') {
-        if (a[orderBy] < b[orderBy]) return -1
-        else if (a[orderBy] > b[orderBy]) return 1;
+        if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) return -1
+        else if (a[orderBy].toLowerCase() > b[orderBy].toLowerCase()) return 1;
         else return 0;
       } else {
-        if (a[orderBy] > b[orderBy]) return -1
-        else if (a[orderBy] < b[orderBy]) return 1;
+        if (a[orderBy].toLowerCase() > b[orderBy].toLowerCase()) return -1
+        else if (a[orderBy].toLowerCase() < b[orderBy].toLowerCase()) return 1;
         else return 0;
       }
     });
