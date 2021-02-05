@@ -44,7 +44,7 @@ const Channels = () => {
   const searchChannel = (searchText) => {
     const searched = [...channels].filter(channel => {
       if (searchText !== '')
-        return (channel.title === searchText || channel.stbNumber === searchText)
+        return (channel.title.toLowerCase() === searchText || channel.stbNumber === searchText)
       return channel;
     });
     setChannelList(searched);
